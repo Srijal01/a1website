@@ -1,0 +1,74 @@
+{
+  "info": {
+    "name": "A1 Website",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.test('response is successful or redirected', function () {",
+          "    pm.expect([200, 201, 302, 303]).to.include(pm.response.code);",
+          "});",
+          "pm.test('response completes within 5 seconds', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+          "});"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://127.0.0.1:8010" },
+    { "key": "csrfToken", "value": "" }
+  ],
+  "item": [
+    { "name": "Home", "request": { "method": "GET", "url": "{{baseUrl}}/" } },
+    { "name": "About", "request": { "method": "GET", "url": "{{baseUrl}}/about" } },
+    { "name": "Services", "request": { "method": "GET", "url": "{{baseUrl}}/services" } },
+    { "name": "Portfolio", "request": { "method": "GET", "url": "{{baseUrl}}/portfolio" } },
+    { "name": "Technologies", "request": { "method": "GET", "url": "{{baseUrl}}/technologies" } },
+    { "name": "Blog", "request": { "method": "GET", "url": "{{baseUrl}}/blog" } },
+    {
+      "name": "Contact page",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const token = pm.response.text().match(/name=\"csrf-token\" content=\"([^\"]+)\"/);",
+              "pm.expect(token, 'CSRF token is present').to.not.be.null;",
+              "pm.collectionVariables.set('csrfToken', token[1]);"
+            ]
+          }
+        }
+      ],
+      "request": { "method": "GET", "url": "{{baseUrl}}/contact" }
+    },
+    {
+      "name": "Submit contact message",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "text/html" },
+          { "key": "Content-Type", "value": "application/x-www-form-urlencoded" },
+          { "key": "X-CSRF-TOKEN", "value": "{{csrfToken}}" }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "name", "value": "Postman Test" },
+            { "key": "email", "value": "postman@example.com" },
+            { "key": "subject", "value": "API test" },
+            { "key": "message", "value": "Message created by Postman." }
+          ]
+        },
+        "url": "{{baseUrl}}/contact"
+      }
+    },
+    { "name": "Admin login page", "request": { "method": "GET", "url": "{{baseUrl}}/admin/login" } },
+    { "name": "Admin dashboard requires login", "request": { "method": "GET", "url": "{{baseUrl}}/admin/dashboard" } }
+  ]
+}

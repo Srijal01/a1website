@@ -19,7 +19,11 @@
                 <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6">
                     @foreach ($techs as $tech)
                         <div class="flex flex-col items-center gap-3 p-5 bg-gray-50 rounded-xl hover:shadow-md hover:-translate-y-1 transition-all">
+                            @if ($tech->logo)
                                 <img src="{{ asset($tech->logo) }}" alt="{{ $tech->name }}" class="h-12 w-auto">
+                            @else
+                                <div class="h-12 flex items-center text-center text-sm font-semibold text-blue-700">{{ $tech->name }}</div>
+                            @endif
                             <span class="text-sm font-medium text-gray-700">{{ $tech->name }}</span>
                             @if ($tech->description)
                                 <p class="text-xs text-gray-500 text-center">{{ Str::limit($tech->description, 60) }}</p>

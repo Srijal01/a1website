@@ -686,6 +686,13 @@ section, .section {
     transform: scale(1.15);
 }
 
+.tech-marquee-item .tech-name {
+    color: var(--heading-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
 @keyframes tech-marquee-scroll {
     0% {
         transform: translateX(0);

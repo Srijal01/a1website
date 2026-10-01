@@ -82,12 +82,20 @@
         <div class="tech-marquee-track">
             @foreach ($technologies as $tech)
                 <div class="tech-marquee-item">
-                    <img src="{{ asset($tech->logo) }}" alt="{{ $tech->name }}" title="{{ $tech->name }}" loading="lazy">
+                    @if ($tech->logo)
+                        <img src="{{ asset($tech->logo) }}" alt="{{ $tech->name }}" title="{{ $tech->name }}" loading="lazy">
+                    @else
+                        <span class="tech-name" title="{{ $tech->name }}">{{ $tech->name }}</span>
+                    @endif
                 </div>
             @endforeach
             @foreach ($technologies as $tech)
                 <div class="tech-marquee-item">
-                    <img src="{{ asset($tech->logo) }}" alt="{{ $tech->name }}" title="{{ $tech->name }}" loading="lazy">
+                    @if ($tech->logo)
+                        <img src="{{ asset($tech->logo) }}" alt="{{ $tech->name }}" title="{{ $tech->name }}" loading="lazy">
+                    @else
+                        <span class="tech-name" title="{{ $tech->name }}">{{ $tech->name }}</span>
+                    @endif
                 </div>
             @endforeach
         </div>

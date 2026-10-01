@@ -1,3 +1,134 @@
+# A.One National Technology Pvt. Ltd.
+
+A dynamic company website and content management system for A.One National Technology Pvt. Ltd. The project presents the company's services, technology expertise, portfolio, blog, team, testimonials, and contact information through a public-facing website. An authenticated admin panel is included for managing website content.
+
+## Features
+
+### Public website
+
+- Home and about pages
+- Services listing and service detail pages
+- Portfolio listing and project detail pages
+- Technologies and technology expertise page
+- Blog categories and blog post detail pages
+- Contact form for visitor enquiries
+- Dynamic pages managed through the admin panel
+
+### Admin panel
+
+The admin panel is available under `/admin` and is protected by authentication and admin authorization. Administrators can manage:
+
+- Pages and website settings
+- Services, portfolios, technologies, and team members
+- Testimonials and clients
+- Blog categories and blog posts
+- Contact messages and reply status
+
+## Technology stack
+
+- PHP 8.2+
+- Laravel 12
+- SQLite by default, with support for other Laravel database drivers
+- Blade templates
+- Vite
+- Tailwind CSS and Bootstrap 5
+- Pest for testing
+
+## Requirements
+
+Make sure the following tools are installed:
+
+- PHP 8.2 or newer
+- Composer
+- Node.js and npm
+
+## Installation
+
+Clone the repository and install the PHP and frontend dependencies:
+
+```bash
+git clone <repository-url>
+cd a1website
+composer install
+npm install
+```
+
+Create the environment file and generate the application key:
+
+```bash
+copy .env.example .env
+php artisan key:generate
+```
+
+The default configuration uses SQLite. Create the database file if it does not exist, then run the migrations and seed the initial website content:
+
+```bash
+php artisan migrate --seed
+```
+
+Build the frontend assets:
+
+```bash
+npm run build
+```
+
+## Running locally
+
+Start the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+For active frontend development, run Vite in a separate terminal:
+
+```bash
+npm run dev
+```
+
+The website is then available at `http://localhost:9999`.
+
+You can also start the application, queue worker, and Vite together with:
+
+```bash
+composer run dev
+```
+
+## Useful commands
+
+```bash
+# Run the test suite
+php artisan test --compact
+
+# List registered routes
+php artisan route:list
+
+# Clear cached application data
+php artisan optimize:clear
+
+# Format PHP files with Laravel Pint
+vendor/bin/pint
+```
+
+## Project structure
+
+```text
+app/                 Application controllers, models, and middleware
+database/            Migrations, factories, and seeders
+public/              Public entry point and uploaded assets
+resources/views/     Public and admin Blade templates
+resources/css/       Application styles
+resources/js/        Frontend JavaScript entry points
+routes/web.php       Public and admin web routes
+```
+
+## Content management
+
+After installation, sign in through `/admin/login` with an administrator account configured by the project seeders. Keep production credentials private and update the seeded account before deploying the application.
+
+## License
+
+This project is proprietary software for A.One National Technology Pvt. Ltd. Unless explicitly permitted, do not redistribute or reuse its content and source code.
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
